@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>OAuth-Dropbox</title>
+  <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track' => true %>
+  <%= javascript_include_tag 'application', 'data-turbolinks-track' => true %>
+  <%= csrf_meta_tags %>
+</head>
+<body>
+
+    <nav class="navbar navbar-default navbar-fixed-top">
+      <div class="container">
+        <div class="navbar-header">
+          <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
+            <span class="sr-only">Toggle navigation</span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+          </button>
+          <a class="navbar-brand" href="<%= root_path %>">Oath-Dropbox</a>
+        </div>
+        <div id="navbar" class="navbar-collapse collapse">
+          <ul class="nav navbar-nav">
+            <li class="active">
+              <%= link_to "Home", root_path, class: "active" %>
+            </li>
+          </ul>
+
+          <ul class="nav navbar-nav navbar-right">
+            <% if current_user %>
+                <li>Logged in as: <%= current_user.email %></li>
+                <li>
+                  <%= link_to "Log Out", logout_path, method: 'delete' %>
+                </li>
+            <% else %>
+                <li>
+                  <%= link_to "Sign Up", signup_path%>
+                </li>
+                <li>
+                  <%= link_to "Log In", login_path %>
+                </li>
+            <% end %>
+          </ul>
+        </div>
+      </div>
+    </nav>
+
+<p class="notice"><%= notice %></p>
+<p class="alert"><%= alert %></p>
+
+<% flash.each do |name, msg| %>
+    <%= content_tag :div, msg, id: "flash_#{name}", class: "container" %>
+<% end %>
+
+<%= yield %>
+
+</body>
+</html>
